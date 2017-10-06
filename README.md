@@ -19,7 +19,7 @@ output = sc.api_call('add-host',payload)
 
 You can set auto-publish=False when initializing the object:
 ```
-sc = SmartCenter('10.1.1.1','username','password',auto-publish=False)
+sc = SmartCenter('10.1.1.1','username','password',autopublish=False)
 ```
 which will add any changes you make to your "session". You can view changes to be published with the api_call command: show-session. You can cancel changes by using the command: discard.
 
