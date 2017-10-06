@@ -17,7 +17,7 @@ payload = {'name': 'hostname', 'ip-address': '10.2.2.2', 'comments': 'Test Devic
 output = sc.api_call('add-host',payload)
 ```
 
-You can set auto-publish=False when initializing the object:
+The autopublish parameter is set to True by default. This means after each api_call the changes will be commited to the config. You can set auto-publish=False when initializing the object:
 ```
 sc = SmartCenter('10.1.1.1','username','password',autopublish=False)
 ```
@@ -25,6 +25,6 @@ which will add any changes you make to your "session". You can view changes to b
 
 To publish you changes run:
 ```
-sc.api_call('publish')
+sc.publish()
 
 ```
