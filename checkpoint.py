@@ -30,7 +30,7 @@ class SmartCenter(object):
     
     def publish(self):
         url = "{b}publish".format(b=self.base_url)
-        req = requests.post(url,verify=False,data={},headers=self.headers)
+        req = requests.post(url,verify=False,data='{}',headers=self.headers)
         
     def logout(self):
         self.api_call('logout')
