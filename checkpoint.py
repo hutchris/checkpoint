@@ -2,12 +2,12 @@ import requests
 import json
 
 class SmartCenter(object):
-    def __init__(self,ip,user,password,port='443',auto-publish=True):
+    def __init__(self,ip,user,password,port='443',autopublish=True):
         self.ip = ip
         self.user = user
         self.password = password
         self.port = port
-        self.auto-publish = auto-publish
+        self.autopublish = autopublish
         self.base_url = "https://{i}:{p}/web_api/".format(i=self.ip,p=self.port)
         self.login()
         
@@ -24,7 +24,7 @@ class SmartCenter(object):
         if isinstance(payload,dict):
             payload = json.dumps(payload)
         req = requests.post(url,verify=False,data=payload,headers=self.headers)
-        if self.auto-publish:
+        if self.autopublish:
             self.publish()
         return(json.loads(req.text))
     
