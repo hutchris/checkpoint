@@ -1,8 +1,10 @@
 import requests
 import json
+import urllib3
 
 class SmartCenter(object):
     def __init__(self,ip,user,password,port='443',autopublish=True):
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         self.ip = ip
         self.user = user
         self.password = password
