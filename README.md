@@ -28,3 +28,12 @@ To publish you changes run:
 sc.publish()
 
 ```
+
+Once your changes are published you can install the policy to your gateways. The method:
+```
+sc.install_policy()
+```
+Will install both access and thread-prevention policies to all gateways. You can modify the default parameters:
+```
+sc.install_policy(access=True,threatPrevention=False,targets=['firewall1','firewall2'])
+```
