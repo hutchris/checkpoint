@@ -17,7 +17,10 @@ class SmartCenter(object):
         url = "{b}login".format(b=self.base_url)
         payload = json.dumps({'user':self.user,'password':self.password})
         req = requests.post(url,verify=False,headers={'Content-Type':'application/json'},data=payload)
-        dreq = json.loads(req.text)
+        try:
+            dreq = json.loads(req.text)
+        except json.decoder.JSONDecodeError:
+            raise(Exception('Malformed JSON response. SmartCenter may not be configured for API access. Raw response:\n{r}'.format(r=req.text)))
         self.sid = dreq['sid']
         self.headers = {'Content-Type':'application/json','X-chkp-sid':self.sid}
         
