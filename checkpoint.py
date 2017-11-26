@@ -31,7 +31,7 @@ class SmartCenter(object):
         req = requests.post(url,verify=False,data=payload,headers=self.headers)
         success,resp = self.parse_resp(req)
         if not success:
-            if resp == 'generic_err_wrong_session_id':
+            if resp['code'] == 'generic_err_wrong_session_id':
                 self.login()
                 req = requests.post(url,verify=False,data=payload,headers=self.headers)
                 success,resp = self.parse_resp(req)
@@ -41,11 +41,10 @@ class SmartCenter(object):
         
     def parse_resp(self,req):
         resp = json.loads(req.text)
+        out = resp
         if 'code' in resp.keys():
-            out = resp['code']
             success = False
         else:
-            out = resp
             success = True
         return(success,out)
                 
