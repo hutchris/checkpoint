@@ -3,19 +3,23 @@ import json
 import urllib3
 
 class SmartCenter(object):
-    def __init__(self,ip,user,password,port='443',autopublish=True):
+    def __init__(self,ip,user,password,port='443',autopublish=True,domain=None):
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
         self.ip = ip
         self.user = user
         self.password = password
         self.port = port
+        self.domain = domain
         self.autopublish = autopublish
         self.base_url = "https://{i}:{p}/web_api/".format(i=self.ip,p=self.port)
         self.login()
         
     def login(self):
         url = "{b}login".format(b=self.base_url)
-        payload = json.dumps({'user':self.user,'password':self.password})
+        if self.domain is None:
+            payload = json.dumps({'user':self.user,'password':self.password})
+        else:
+            payload = json.dumps({'user':self.user,'password':self.password,'domain':self.domain})
         req = requests.post(url,verify=False,headers={'Content-Type':'application/json'},data=payload)
         try:
             dreq = json.loads(req.text)
